@@ -1,6 +1,12 @@
 from django.db import models
 from django.core.validators import RegexValidator
 
+__all__ = (
+    Contact,
+    ContactPhone,
+    ContactEmail,
+)
+
 class Contact(models.Model):
     user = models.ForeignKey('User')
     name = models.CharField(max_length=128, required=True)
