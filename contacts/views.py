@@ -13,6 +13,10 @@ __all__ = (
 )
 
 
+class ContactListView(_list.ListView):
+    model = Contact
+
+
 class ContactView(detail.DetailView):
     model = Contact
 
@@ -40,7 +44,3 @@ class ContactEmailView(detail.DetailView):
             )
         )
         return query_set
-
-
-class ContactListView(_list.ListView):
-    model = Contact
