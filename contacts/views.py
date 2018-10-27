@@ -1,4 +1,7 @@
-from django.views.generic import detail, list as _list
+from django.views.generic import (
+    detail,
+    list as _list
+)
 from .models import (
     Contact,
     ContactPhone,
