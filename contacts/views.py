@@ -1,18 +1,24 @@
 from django.views.generic import (
     detail,
-    list as _list
+    edit,
+    list as _list,
 )
+from django.urls import reverse_lazy
 from .models import (
     Contact,
-    ContactPhone,
     ContactEmail,
+    ContactPhone,
+)
+from .forms import (
+    ContactModelForm,
 )
 
 __all__ = (
+    'ContactListView',
     'ContactView',
+    'ContactCreateView',
     'ContactPhoneView',
     'ContactEmailView',
-    'ContactListView',
 )
 
 
@@ -22,6 +28,17 @@ class ContactListView(_list.ListView):
 
 class ContactView(detail.DetailView):
     model = Contact
+
+
+class ContactCreateView(edit.CreateView):
+    model = Contact
+    fields = ['name']
+    success_url = reverse_lazy('contact-list')
+
+    def form_valid(self, form):
+        current_user = self.request.user
+        form.instance.user = current_user
+        return super().form_valid(form)
 
 
 class ContactPhoneView(detail.DetailView):
