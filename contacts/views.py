@@ -1,4 +1,4 @@
-from django.views.generic import detail
+from django.views.generic import detail, list as _list
 from .models import (
     Contact,
     ContactPhone,
@@ -9,6 +9,7 @@ __all__ = (
     'ContactView',
     'ContactPhoneView',
     'ContactEmailView',
+    'ContactListView',
 )
 
 
@@ -39,3 +40,7 @@ class ContactEmailView(detail.DetailView):
             )
         )
         return query_set
+
+
+class ContactListView(_list.ListView):
+    model = Contact
