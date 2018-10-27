@@ -5,6 +5,7 @@ from .views import (
     ContactEmailView,
 )
 
+
 urlpatterns = [
     path('<pk>', ContactView.as_view(), name='contact-detail'),
     path('<contact_pk>/phone/<pk>', ContactPhoneView.as_view(), name='phone-detail'),

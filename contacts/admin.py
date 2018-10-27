@@ -5,6 +5,7 @@ from .models import (
     ContactEmail,
 )
 
+
 admin.site.register(Contact)
 admin.site.register(ContactPhone)
 admin.site.register(ContactEmail)

@@ -7,6 +7,7 @@ __all__ = (
     'ContactEmail',
 )
 
+
 class Contact(models.Model):
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     name = models.CharField(max_length=128)
