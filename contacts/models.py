@@ -15,7 +15,7 @@ class Contact(models.Model):
         return self.name
 
 class ContactPhone(models.Model):
-    contact = models.ForeignKey('Contact', models.CASCADE)
+    contact = models.ForeignKey('Contact', on_delete=models.CASCADE)
     phone_regex = RegexValidator(
         regex=r'^\+?1?\d{9,15}$',
         message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed."
@@ -26,7 +26,7 @@ class ContactPhone(models.Model):
         return self.phone_number
 
 class ContactEmail(models.Model):
-    contact = models.ForeignKey('Contact', models.CASCADE)
+    contact = models.ForeignKey('Contact', on_delete=models.CASCADE)
     email = models.EmailField()
 
     def __str__(self):
