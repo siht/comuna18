@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import RegexValidator
+from django.urls import reverse
 
 __all__ = (
     'Contact',
@@ -12,8 +13,12 @@ class Contact(models.Model):
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     name = models.CharField(max_length=128)
 
+    def get_absolute_url(self):
+        return reverse('contact-detail', kwargs={'pk': self.pk})
+
     def __str__(self):
         return self.name
+
 
 class ContactPhone(models.Model):
     contact = models.ForeignKey('Contact', on_delete=models.CASCADE)
@@ -25,6 +30,7 @@ class ContactPhone(models.Model):
 
     def __str__(self):
         return self.phone_number
+
 
 class ContactEmail(models.Model):
     contact = models.ForeignKey('Contact', on_delete=models.CASCADE)
