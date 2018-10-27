@@ -17,6 +17,7 @@ __all__ = (
     'ContactListView',
     'ContactView',
     'ContactCreateView',
+    'ContractUpdateView',
     'ContactPhoneView',
     'ContactEmailView',
 )
@@ -41,6 +42,12 @@ class ContactCreateView(edit.CreateView):
         return super().form_valid(form)
 
 
+class ContractUpdateView(edit.UpdateView):
+    model = Contact
+    fields = ['name']
+    success_url = reverse_lazy('contact-list')
+
+
 class ContactPhoneView(detail.DetailView):
     model = ContactPhone
 
@@ -52,6 +59,7 @@ class ContactPhoneView(detail.DetailView):
             )
         )
         return query_set
+
 
 class ContactEmailView(detail.DetailView):
     model = ContactEmail
