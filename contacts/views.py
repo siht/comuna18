@@ -1,3 +1,18 @@
-from django.shortcuts import render
+from django.views.generic import detail
+from .models import (
+    Contact,
+    ContactPhone,
+    ContactEmail,
+)
 
-# Create your views here.
+
+class ContactView(detail.DetailView):
+    model = Contact
+
+
+class ContactPhoneView(detail.DetailView):
+    model = ContactPhone
+
+
+class ContactEmailView(detail.DetailView):
+    model = ContactEmail
