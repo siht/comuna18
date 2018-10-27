@@ -1,18 +1,14 @@
 <h1>{{ object.name }}</h1>
 <h2>emails</h2>
-{% if object.contactemail_set.count %}
 {% for email in object.contactemail_set.all %}
 {{ email }}
-{% endfor %}
-{% else %}
+{% empty %}
 <p>no hay emails que mostrar</p>
-{% endif %}
+{% endfor %}
 
 <h2>telefonos</h2>
-{% if object.contactphone_set.count %}
 {% for phone in object.contactphone_set.all %}
 {{ phone }}
-{% endfor %}
-{% else %}
+{% empty %}
 <p>no hay telefonos que mostrar</p>
-{% endif %}
+{% endfor %}
