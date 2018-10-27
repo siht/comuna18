@@ -17,6 +17,23 @@ class ContactView(detail.DetailView):
 class ContactPhoneView(detail.DetailView):
     model = ContactPhone
 
+    def get_queryset(self):
+        query_set = (
+            self.model.objects
+            .filter(
+                contact_id=self.kwargs.get('contact_pk')
+            )
+        )
+        return query_set
 
 class ContactEmailView(detail.DetailView):
     model = ContactEmail
+
+    def get_queryset(self):
+        query_set = (
+            self.model.objects
+            .filter(
+                contact_id=self.kwargs.get('contact_pk')
+            )
+        )
+        return query_set
