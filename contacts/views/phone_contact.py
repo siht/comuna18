@@ -46,7 +46,7 @@ class ContactPhoneView(OwnPhonesMixin, detail.DetailView):
 class ContactPhoneCreateView(edit.CreateView):
     model = ContactPhone
     fields = ['phone_number']
-    success_url = reverse_lazy('contact-list')
+    success_url = reverse_lazy('contacts:contact-list')
 
     def form_valid(self, form):
         contact_pk = self.kwargs.get('contact_pk')
@@ -58,4 +58,4 @@ class ContactPhoneCreateView(edit.CreateView):
 class ContactPhoneUpdateView(edit.UpdateView):
     model = ContactPhone
     fields = ['phone_number']
-    success_url = reverse_lazy('contact-list')
+    success_url = reverse_lazy('contacts:contact-list')

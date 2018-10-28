@@ -25,7 +25,7 @@ class ContactView(detail.DetailView):
 class ContactCreateView(edit.CreateView):
     model = Contact
     fields = ['name']
-    success_url = reverse_lazy('contact-list')
+    success_url = reverse_lazy('contacts:contact-list')
 
     def form_valid(self, form):
         current_user = self.request.user
@@ -36,4 +36,4 @@ class ContactCreateView(edit.CreateView):
 class ContactUpdateView(edit.UpdateView):
     model = Contact
     fields = ['name']
-    success_url = reverse_lazy('contact-list')
+    success_url = reverse_lazy('contacts:contact-list')

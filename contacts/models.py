@@ -14,7 +14,7 @@ class Contact(models.Model):
     name = models.CharField(max_length=128)
 
     def get_absolute_url(self):
-        return reverse('contact-detail', kwargs={'pk': self.pk})
+        return reverse('contacts:contact-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.name
@@ -28,6 +28,9 @@ class ContactPhone(models.Model):
     )
     phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True) # validators should be a list
 
+    def get_absolute_url(self):
+        return reverse('contacts:phone-detail', kwargs={'pk': self.pk})
+
     def __str__(self):
         return self.phone_number
 
@@ -35,6 +38,9 @@ class ContactPhone(models.Model):
 class ContactEmail(models.Model):
     contact = models.ForeignKey('Contact', on_delete=models.CASCADE)
     email = models.EmailField()
+
+    def get_absolute_url(self):
+        return reverse('contacts:email-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.email
