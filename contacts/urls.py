@@ -8,6 +8,7 @@ from .views import (
     ContactEmailView,
     ContactEmailListView,
     ContactEmailCreateView,
+    ContactEmailUpdateView,
 )
 
 
@@ -19,5 +20,6 @@ urlpatterns = [
     path('<contact_pk>/phone/<pk>', ContactPhoneView.as_view(), name='phone-detail'),
     path('<contact_pk>/mail/', ContactEmailListView.as_view(), name='email'),
     path('<contact_pk>/mail/<pk>', ContactEmailView.as_view(), name='email-detail'),
-    path('<contact_pk>/mail/create/', ContactEmailCreateView.as_view(), name='email-create'),
+    path('<contact_pk>/mail/new/', ContactEmailCreateView.as_view(), name='email-create'),
+    path('<contact_pk>/mail/edit/<pk>', ContactEmailUpdateView.as_view(), name='email-update'),
 ]

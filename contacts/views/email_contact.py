@@ -13,6 +13,7 @@ __all__ = (
     'ContactEmailView',
     'ContactEmailListView',
     'ContactEmailCreateView',
+    'ContactEmailUpdateView',
 )
 
 class OwnMailsMixin:
@@ -26,7 +27,7 @@ class OwnMailsMixin:
         return contact_emails_accounts
 
 
-class ContactEmailListView(_list.ListView, OwnMailsMixin):
+class ContactEmailListView(OwnMailsMixin, _list.ListView):
     model = ContactEmail
 
     def get_context_data(self, *args, **kwargs):
@@ -37,7 +38,7 @@ class ContactEmailListView(_list.ListView, OwnMailsMixin):
         return context
 
 
-class ContactEmailView(detail.DetailView, OwnMailsMixin):
+class ContactEmailView(OwnMailsMixin, detail.DetailView):
     model = ContactEmail
 
 
@@ -51,3 +52,9 @@ class ContactEmailCreateView(edit.CreateView):
         current_contact = Contact.objects.get(pk=contact_pk)
         form.instance.contact = current_contact
         return super().form_valid(form)
+
+
+class ContactEmailUpdateView(edit.UpdateView):
+    model = ContactEmail
+    fields = ['email']
+    success_url = reverse_lazy('contact-list')
