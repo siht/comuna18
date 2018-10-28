@@ -13,6 +13,7 @@ __all__ = (
     'ContactPhoneListView',
     'ContactPhoneView',
     'ContactPhoneCreateView',
+    'ContactPhoneUpdateView',
 )
 
 
@@ -52,3 +53,9 @@ class ContactPhoneCreateView(edit.CreateView):
         current_contact = Contact.objects.get(pk=contact_pk)
         form.instance.contact = current_contact
         return super().form_valid(form)
+
+
+class ContactPhoneUpdateView(edit.UpdateView):
+    model = ContactPhone
+    fields = ['phone_number']
+    success_url = reverse_lazy('contact-list')
