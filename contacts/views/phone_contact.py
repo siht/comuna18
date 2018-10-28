@@ -12,6 +12,7 @@ from ..models import (
 __all__ = (
     'ContactPhoneListView',
     'ContactPhoneView',
+    'ContactPhoneCreateView',
 )
 
 
@@ -39,3 +40,15 @@ class ContactPhoneListView(OwnPhonesMixin, _list.ListView):
 
 class ContactPhoneView(OwnPhonesMixin, detail.DetailView):
     model = ContactPhone
+
+
+class ContactPhoneCreateView(edit.CreateView):
+    model = ContactPhone
+    fields = ['phone_number']
+    success_url = reverse_lazy('contact-list')
+
+    def form_valid(self, form):
+        contact_pk = self.kwargs.get('contact_pk')
+        current_contact = Contact.objects.get(pk=contact_pk)
+        form.instance.contact = current_contact
+        return super().form_valid(form)
