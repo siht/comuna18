@@ -6,6 +6,7 @@ from .views import (
     ContactUpdateView,
     ContactPhoneView,
     ContactEmailView,
+    ContactEmailListView,
 )
 
 
@@ -15,5 +16,6 @@ urlpatterns = [
     path('new/', ContactCreateView.as_view(), name='contact-create'),
     path('edit/<pk>', ContactUpdateView.as_view(), name='contact-create'),
     path('<contact_pk>/phone/<pk>', ContactPhoneView.as_view(), name='phone-detail'),
+    path('<contact_pk>/mail/', ContactEmailListView.as_view(), name='email'),
     path('<contact_pk>/mail/<pk>', ContactEmailView.as_view(), name='email-detail'),
 ]
