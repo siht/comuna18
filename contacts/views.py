@@ -49,23 +49,23 @@ class ContactPhoneView(detail.DetailView):
     model = ContactPhone
 
     def get_queryset(self):
-        my_phones = (
+        contact_phones = (
             self.model.objects
             .filter(
                 contact_id=self.kwargs.get('contact_pk')
             )
         )
-        return my_phones
+        return contact_phones
 
 
 class ContactEmailView(detail.DetailView):
     model = ContactEmail
 
     def get_queryset(self):
-        my_emails_accounts = (
+        contact_emails_accounts = (
             self.model.objects
             .filter(
                 contact_id=self.kwargs.get('contact_pk')
             )
         )
-        return my_emails_accounts
+        return contact_emails_accounts
