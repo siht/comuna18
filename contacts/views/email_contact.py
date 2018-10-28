@@ -4,7 +4,10 @@ from django.views.generic import (
     list as _list,
 )
 from django.urls import reverse_lazy
-from ..models import ContactEmail
+from ..models import (
+    Contact,
+    ContactEmail
+)
 
 __all__ = (
     'ContactEmailView',
@@ -24,6 +27,13 @@ class OwnMailsMixin:
 
 class ContactEmailListView(_list.ListView, OwnMailsMixin):
     model = ContactEmail
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        contact_id = self.kwargs.get('contact_pk')
+        contact = Contact.objects.get(id=contact_id)
+        context.update(contact=contact)
+        return context
 
 
 class ContactEmailView(detail.DetailView, OwnMailsMixin):
