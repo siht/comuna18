@@ -45,7 +45,7 @@ class ContactEmailView(OwnMailsMixin, detail.DetailView):
 class ContactEmailCreateView(edit.CreateView):
     model = ContactEmail
     fields = ['email']
-    success_url = reverse_lazy('contact-list')
+    success_url = reverse_lazy('contacts:contact-list')
 
     def form_valid(self, form):
         contact_pk = self.kwargs.get('contact_pk')
@@ -57,4 +57,4 @@ class ContactEmailCreateView(edit.CreateView):
 class ContactEmailUpdateView(edit.UpdateView):
     model = ContactEmail
     fields = ['email']
-    success_url = reverse_lazy('contact-list')
+    success_url = reverse_lazy('contacts:contact-list')

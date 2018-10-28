@@ -14,7 +14,7 @@ from .views import (
     ContactEmailUpdateView,
 )
 
-
+app_name = 'contacts'
 urlpatterns = [
     path('', ContactListView.as_view(), name='contact-list'),
     path('<pk>', ContactView.as_view(), name='contact-detail'),

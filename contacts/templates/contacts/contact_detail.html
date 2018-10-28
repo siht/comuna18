@@ -1,18 +1,20 @@
-<h1>{{ object.name }}</h1>
-<h2>emails</h2>
+<h1><a href="{% url 'contacts:contact-update' object.id %}">{{ object }}</a></h1>
+<h2><a href="{% url 'contacts:email' object.id %}">emails</a></h2>
 <ul>
 {% for email in object.contactemail_set.all %}
-<li>{{ email }}</li>
+<li><a href="{% url 'contacts:email-update' object.id email.id %}">{{ email }}</a></li>
 {% empty %}
 <p>no hay emails que mostrar</p>
 {% endfor %}
 </ul>
+<a href="{% url 'contacts:email-create' object.id %}">agregar mail</a>
 
-<h2>telefonos</h2>
+<h2><a href="{% url 'contacts:phone' object.id %}">telefonos</a></h2>
 <ul>
 {% for phone in object.contactphone_set.all %}
-<li>{{ phone }}</li>
+<li><a href="{% url 'contacts:phone-update' object.id phone.id %}">{{ phone }}</a></li>
 {% empty %}
 <p>no hay telefonos que mostrar</p>
 {% endfor %}
 </ul>
+<a href="{% url 'contacts:phone-create' object.id %}">agregar telefono</a>

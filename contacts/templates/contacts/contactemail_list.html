@@ -1,8 +1,9 @@
 <h1>emails de {{ contact }}: </h1>
 <ul>
 {% for contact in object_list %}
-    <li>{{ contact.email}}</li>
+    <li><a href="{% url 'contacts:email-update' contact.contact.id contact.id %}">{{ contact.email}}</a></li>
 {% empty %}
     <li>No hay contactos que mostrar.</li>
 {% endfor %}
 </ul>
+<a href="{% url 'contacts:email-create' contact.id %}">agregar mail</a>
