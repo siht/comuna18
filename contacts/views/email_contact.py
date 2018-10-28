@@ -1,4 +1,8 @@
-from django.views.generic import detail
+from django.views.generic import (
+    detail,
+    edit,
+    list as _list,
+)
 from django.urls import reverse_lazy
 from ..models import ContactEmail
 
