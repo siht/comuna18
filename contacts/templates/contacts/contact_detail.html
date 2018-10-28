@@ -1,0 +1,18 @@
+<h1>{{ object.name }}</h1>
+<h2>emails</h2>
+<ul>
+{% for email in object.contactemail_set.all %}
+<li>{{ email }}</li>
+{% empty %}
+<p>no hay emails que mostrar</p>
+{% endfor %}
+</ul>
+
+<h2>telefonos</h2>
+<ul>
+{% for phone in object.contactphone_set.all %}
+<li>{{ phone }}</li>
+{% empty %}
+<p>no hay telefonos que mostrar</p>
+{% endfor %}
+</ul>
