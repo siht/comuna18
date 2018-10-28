@@ -9,9 +9,6 @@ from .models import (
     ContactEmail,
     ContactPhone,
 )
-from .forms import (
-    ContactModelForm,
-)
 
 __all__ = (
     'ContactListView',
@@ -52,23 +49,23 @@ class ContactPhoneView(detail.DetailView):
     model = ContactPhone
 
     def get_queryset(self):
-        query_set = (
+        my_phones = (
             self.model.objects
             .filter(
                 contact_id=self.kwargs.get('contact_pk')
             )
         )
-        return query_set
+        return my_phones
 
 
 class ContactEmailView(detail.DetailView):
     model = ContactEmail
 
     def get_queryset(self):
-        query_set = (
+        my_emails_accounts = (
             self.model.objects
             .filter(
                 contact_id=self.kwargs.get('contact_pk')
             )
         )
-        return query_set
+        return my_emails_accounts
