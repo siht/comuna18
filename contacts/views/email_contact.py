@@ -8,12 +8,10 @@ from ..models import ContactEmail
 
 __all__ = (
     'ContactEmailView',
+    'ContactEmailListView',
 )
 
-
-class ContactEmailView(detail.DetailView):
-    model = ContactEmail
-
+class OwnMailsMixin:
     def get_queryset(self):
         contact_emails_accounts = (
             self.model.objects
@@ -22,3 +20,11 @@ class ContactEmailView(detail.DetailView):
             )
         )
         return contact_emails_accounts
+
+
+class ContactEmailListView(_list.ListView, OwnMailsMixin):
+    model = ContactEmail
+
+
+class ContactEmailView(detail.DetailView, OwnMailsMixin):
+    model = ContactEmail
