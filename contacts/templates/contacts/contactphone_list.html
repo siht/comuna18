@@ -1,0 +1,12 @@
+{% extends "contacts/base.html" %}
+{% block subcontent %}
+<h1>emails de {{ contact }}: </h1>
+<ul>
+{% for contact in object_list %}
+    <li><a href="{% url 'contacts:phone-update' contact.contact.id contact.id %}">{{ contact.phone_number}}</a></li>
+{% empty %}
+    <li>No hay contactos que mostrar.</li>
+{% endfor %}
+</ul>
+<a href="{% url 'contacts:phone-create' contact.id %}">agregar telefono</a>
+{% endblock subcontent %}

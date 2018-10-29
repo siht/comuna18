@@ -1,21 +1,31 @@
-"""contacts URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/2.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
-from django.contrib import admin
 from django.urls import path
+from .views import (
+    ContactListView,
+    ContactView,
+    ContactCreateView,
+    ContactUpdateView,
+    ContactPhoneView,
+    ContactPhoneListView,
+    ContactPhoneCreateView,
+    ContactPhoneUpdateView,
+    ContactEmailView,
+    ContactEmailListView,
+    ContactEmailCreateView,
+    ContactEmailUpdateView,
+)
 
+app_name = 'contacts'
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('', ContactListView.as_view(), name='contact-list'),
+    path('<pk>', ContactView.as_view(), name='contact-detail'),
+    path('new/', ContactCreateView.as_view(), name='contact-create'),
+    path('edit/<pk>', ContactUpdateView.as_view(), name='contact-update'),
+    path('<contact_pk>/phone/', ContactPhoneListView.as_view(), name='phone'),
+    path('<contact_pk>/phone/new/', ContactPhoneCreateView.as_view(), name='phone-create'),
+    path('<contact_pk>/phone/<pk>', ContactPhoneView.as_view(), name='phone-detail'),
+    path('<contact_pk>/phone/edit/<pk>', ContactPhoneUpdateView.as_view(), name='phone-update'),
+    path('<contact_pk>/mail/', ContactEmailListView.as_view(), name='email'),
+    path('<contact_pk>/mail/<pk>', ContactEmailView.as_view(), name='email-detail'),
+    path('<contact_pk>/mail/new/', ContactEmailCreateView.as_view(), name='email-create'),
+    path('<contact_pk>/mail/edit/<pk>', ContactEmailUpdateView.as_view(), name='email-update'),
 ]
