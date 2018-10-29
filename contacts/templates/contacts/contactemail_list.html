@@ -1,5 +1,5 @@
 {% extends "contacts/base.html" %}
-{% block content %}
+{% block subcontent %}
 <h1>emails de {{ contact }}: </h1>
 <ul>
 {% for contact in object_list %}
@@ -9,4 +9,4 @@
 {% endfor %}
 </ul>
 <a href="{% url 'contacts:email-create' contact.id %}">agregar mail</a>
-{% endblock content %}
+{% endblock subcontent %}
