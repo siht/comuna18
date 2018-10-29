@@ -1,3 +1,5 @@
+{% extends "contacts/base.html" %}
+{% block content %}
 <h1><a href="{% url 'contacts:contact-update' object.id %}">{{ object }}</a></h1>
 <h2><a href="{% url 'contacts:email' object.id %}">emails</a></h2>
 <ul>
@@ -18,3 +20,4 @@
 {% endfor %}
 </ul>
 <a href="{% url 'contacts:phone-create' object.id %}">agregar telefono</a>
+{% endblock content %}
