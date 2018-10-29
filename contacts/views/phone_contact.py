@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (
     detail,
     edit,
@@ -28,8 +29,10 @@ class OwnPhonesMixin:
         return contact_phones
 
 
-class ContactPhoneListView(OwnPhonesMixin, _list.ListView):
+class ContactPhoneListView(LoginRequiredMixin, OwnPhonesMixin, _list.ListView):
     model = ContactPhone
+    login_url = reverse_lazy('auth_login')
+    redirect_field_name = 'redirect_to'
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -39,14 +42,18 @@ class ContactPhoneListView(OwnPhonesMixin, _list.ListView):
         return context
 
 
-class ContactPhoneView(OwnPhonesMixin, detail.DetailView):
+class ContactPhoneView(LoginRequiredMixin, OwnPhonesMixin, detail.DetailView):
     model = ContactPhone
+    login_url = reverse_lazy('auth_login')
+    redirect_field_name = 'redirect_to'
 
 
-class ContactPhoneCreateView(edit.CreateView):
+class ContactPhoneCreateView(LoginRequiredMixin, edit.CreateView):
     model = ContactPhone
     fields = ['phone_number']
     success_url = reverse_lazy('contacts:contact-list')
+    login_url = reverse_lazy('auth_login')
+    redirect_field_name = 'redirect_to'
 
     def form_valid(self, form):
         contact_pk = self.kwargs.get('contact_pk')
@@ -55,7 +62,9 @@ class ContactPhoneCreateView(edit.CreateView):
         return super().form_valid(form)
 
 
-class ContactPhoneUpdateView(edit.UpdateView):
+class ContactPhoneUpdateView(LoginRequiredMixin, edit.UpdateView):
     model = ContactPhone
     fields = ['phone_number']
     success_url = reverse_lazy('contacts:contact-list')
+    login_url = reverse_lazy('auth_login')
+    redirect_field_name = 'redirect_to'

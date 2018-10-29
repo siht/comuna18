@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <div>
-	bienvenido {{ request.user }}, <a href="{% url 'auth_logout' %}?next=/accounts/login/">logout</a>
+	bienvenido {{ request.user }}, <a href="{% url 'auth_logout' %}?next={% url 'auth_login' %}">logout</a>
 </div>
 {% block subcontent %}
 {% endblock subcontent %}

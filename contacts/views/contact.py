@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (
     detail,
     edit,
@@ -25,18 +26,24 @@ class OwnContactsMixin:
         return own_contacts
 
 
-class ContactListView(OwnContactsMixin, _list.ListView):
+class ContactListView(LoginRequiredMixin, OwnContactsMixin, _list.ListView):
     model = Contact
+    login_url = reverse_lazy('auth_login')
+    redirect_field_name = 'redirect_to'
 
 
-class ContactView(OwnContactsMixin, detail.DetailView):
+class ContactView(LoginRequiredMixin, OwnContactsMixin, detail.DetailView):
     model = Contact
+    login_url = reverse_lazy('auth_login')
+    redirect_field_name = 'redirect_to'
 
 
-class ContactCreateView(edit.CreateView):
+class ContactCreateView(LoginRequiredMixin, edit.CreateView):
     model = Contact
     fields = ['name']
     success_url = reverse_lazy('contacts:contact-list')
+    login_url = reverse_lazy('auth_login')
+    redirect_field_name = 'redirect_to'
 
     def form_valid(self, form):
         current_user = self.request.user
@@ -44,7 +51,9 @@ class ContactCreateView(edit.CreateView):
         return super().form_valid(form)
 
 
-class ContactUpdateView(edit.UpdateView):
+class ContactUpdateView(LoginRequiredMixin, edit.UpdateView):
     model = Contact
     fields = ['name']
     success_url = reverse_lazy('contacts:contact-list')
+    login_url = reverse_lazy('auth_login')
+    redirect_field_name = 'redirect_to'
