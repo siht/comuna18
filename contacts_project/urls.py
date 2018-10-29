@@ -14,9 +14,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path,reverse_lazy
+
+from registration.backends.simple.views import RegistrationView
+
+class MyRegistrationView(RegistrationView):
+    def get_success_url(self, request):
+        return reverse_lazy('contacts:contact-list')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('contacts/', include('contacts.urls', namespace='contacts')),
+    path('accounts/register/', MyRegistrationView.as_view(), name='registration_register'),
+    path('accounts/', include('registration.backends.simple.urls')),
 ]
