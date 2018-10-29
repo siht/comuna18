@@ -14,11 +14,22 @@ __all__ = (
 )
 
 
-class ContactListView(_list.ListView):
+class OwnContactsMixin:
+    def get_queryset(self):
+        own_contacts = (
+            self.model.objects
+            .filter(
+                user=self.request.user
+            )
+        )
+        return own_contacts
+
+
+class ContactListView(OwnContactsMixin, _list.ListView):
     model = Contact
 
 
-class ContactView(detail.DetailView):
+class ContactView(OwnContactsMixin, detail.DetailView):
     model = Contact
 
 
